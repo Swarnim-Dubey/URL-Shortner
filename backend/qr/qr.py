@@ -1,9 +1,12 @@
+from fileinput import filename
+
 import qrcode
-from backend.app.utils import generate_short_code
 
-qr = qrcode.QRCode(version=1, box_size=10, border=5)
-qr.add_data(generate_short_code())
-qr.make(fit=True)
+def generate_qr_code(url):
 
-# image generation
-img = qr.make_image(fill="black", back_color="white")
+    qr = qrcode.QRCode(version=1, box_size=10, border=5)
+    qr.add_data(url)
+    qr.make(fit=True)
+
+    img = qr.make_image(fill="black", back_color="white")
+    img.save(filename)
