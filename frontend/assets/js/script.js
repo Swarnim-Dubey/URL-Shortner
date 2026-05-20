@@ -1,61 +1,42 @@
-const form = document.querySelector("#shorten-form");
-const resultDiv = document.querySelector("#result");
-const shortUrlInput = document.querySelector("#short-url");
-const copyBtn = document.querySelector("#copy-btn");
-const qrImage = document.querySelector("#qr-image");
-
-form.addEventListener("submit", async (event) => {
-
-    event.preventDefault();
-    const url = document.querySelector("#url-input").value;
-    const customCode = document.querySelector("#custom-code").value;
-
+const form = document.getElementById("url-form");
+const resultBox = document.getElementById("result");
+const shortUrlInput = document.getElementById("short-url");
+const copyBtn = document.getElementById("copy-btn");
+resultBox.style.display = "none";
+form.addEventListener("submit", async function (e) {
+    e.preventDefault();
+    const longUrl = document.getElementById("long-url").value;
+    const customCode = document.getElementById("custom-code").value;
     try {
         const response = await fetch("/shorten", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
-
             body: JSON.stringify({
-                url: url,
+                url: longUrl,
                 custom_code: customCode
             })
         });
         const data = await response.json();
 
-        if (!response.ok) {
+        if (response.ok) {
+            shortUrlInput.value = data.short_url;
+            resultBox.style.display = "block";
+        } else {
             alert(data.error);
-            return;
         }
-        shortUrlInput.value = data.short_url;
-        qrImage.src = data.qr_code;
-        resultDiv.classList.remove("hidden");
-    }
-
-    catch (error) {
+    } catch (error) {
         console.error(error);
-        alert("Something went wrong.");
-    }
-
-});
-
-copyBtn.addEventListener("click", async () => {
-
-    try {
-        await navigator.clipboard.writeText(
-            shortUrlInput.value
-        );
-
-        copyBtn.innerText = "Copied!";
-        setTimeout(() => {
-            copyBtn.innerText = "Copy";
-        }, 2000);
-
-    }
-    catch (error) {
-        console.error(error);
-        alert("Failed to copy URL.");
+        alert("Server error");
     }
 });
 
+copyBtn.addEventListener("click", function () {
+    navigator.clipboard.writeText(shortUrlInput.value);
+    copyBtn.innerText = "Copied!";
+
+    setTimeout(() => {
+        copyBtn.innerText = "Copy";
+    }, 2000);
+});
