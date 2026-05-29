@@ -6,31 +6,30 @@
 
 body {
     font-family: Arial, sans-serif;
-    background: #ececec;
-    height: 100vh;
-
+    background-image: url("/assets/img/img.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100vh;
 }
 
 .container {
-    width: 500px;
-
-    background: white;
-
-    padding: 40px;
-
-    border-radius: 16px;
-
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    background: rgba(255, 255, 255, 0.9);;
+    backdrop-filter: blur(5px);
+    padding: 30px;
+    border-radius: 10px;
+    width: 400px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
 h1 {
     margin-bottom: 10px;
 }
 
-p {
+.subtitle {
     margin-bottom: 20px;
     color: gray;
 }
@@ -38,40 +37,73 @@ p {
 form {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 10px;
 }
 
 input {
-    padding: 14px;
-
-    border-radius: 8px;
-
+    padding: 12px;
     border: 1px solid #ccc;
-
-    font-size: 16px;
+    border-radius: 5px;
 }
 
-button {
-    padding: 14px;
-
+button{
+    padding: 12px;
     border: none;
-
-    border-radius: 8px;
-
-    background: black;
-
+    border-radius: 5px;
+    background-color: black;
     color: white;
-
-    font-size: 16px;
-
     cursor: pointer;
 }
 
-.result-box {
-    margin-top: 25px;
+button:hover {
+    opacity: 0.9;
 }
 
-.result-row {
+#result {
+    margin-top: 20px;
+}
+
+.result-box {
     display: flex;
     gap: 10px;
+    margin-top: 10px;
+}
+
+.hidden {
+    display: none;
+}
+
+.qr-container {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.qr-container img {
+    margin-top: 10px;
+    width: 180px;
+    height: 180px;
+}
+
+#short-url {
+    flex: 1;
+    background-color: #f8f8f8;
+}
+
+.qr-container {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.qr-container p {
+    margin-bottom: 10px;
+    color: gray;
+}
+
+#qr-image {
+    width: 180px;
+    height: 180px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    background: white;
 }
